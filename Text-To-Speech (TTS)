@@ -1,0 +1,26 @@
+from google.cloud import texttospeech
+
+# Create a client
+client = texttospeech.TextToSpeechClient()
+
+# Define the input text
+input_text = "Hello, how are you?"
+
+# Set the TTS voice and configuration
+voice = texttospeech.VoiceSelectionParams(
+    language_code="en-US", ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
+)
+audio_config = texttospeech.AudioConfig(
+    audio_encoding=texttospeech.AudioEncoding.MP3
+)
+
+# Synthesize speech
+response = client.synthesize_speech(
+    input=texttospeech.SynthesisInput(text=input_text),
+    voice=voice,
+    audio_config=audio_config
+)
+
+# Save the synthesized speech to a file
+with open("output.mp3", "wb") as f:
+    f.write(response.audio_content)
