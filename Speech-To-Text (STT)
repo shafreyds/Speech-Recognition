@@ -1,0 +1,16 @@
+ximport speech_recognition as sr
+
+# Create a recognizer instance
+r = sr.Recognizer()
+
+# Load the audio file
+audio_file = "input.wav"
+with sr.AudioFile(audio_file) as source:
+    audio = r.record(source)
+
+# Perform speech recognition
+text = r.recognize_google(audio)
+
+# Print the recognized text
+print("Recognized Text:")
+print(text)
